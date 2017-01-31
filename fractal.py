@@ -13,12 +13,12 @@ def randomWeighted(weights):
             return i
         else: k += weights[i]
 
-#make header array
+#Specify the width and height of the image (in pixels)
 
 width = 1000
 height = 1000
 
-#make image data
+#Make image data
 pixelList = [[0 for x in range(width)] for y in range(height)]
 
 #set plot range
