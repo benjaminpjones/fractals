@@ -28,11 +28,10 @@ treeIFS = [tree1,tree2,tree3,tree4]
 def dragon1(point): return linear((0.5, -0.5, 0.5, 0.5), point, (0.0, 0.0))
 def dragon2(point): return linear((-0.5, -0.5, 0.5, -0.5), point, (1.0, 0.0))
 def dragonUnbounded(point):
-    twoPower = 20
-    return (random.randint(-1,1)*2.0**twoPower,random.randint(-1,1)*2.0**twoPower)
+    twoPower = 30
+    return (random.randint(-1,1)*math.sqrt(2.0)**twoPower,random.randint(-1,1)*math.sqrt(2.0)**twoPower)
 
-dragonIFS = [dragon1, dragon2]
-
+dragonIFS = [dragon1, dragon2, dragonUnbounded]
 
 
 phi = (1.0 + math.sqrt(5.0))/2.0
