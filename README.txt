@@ -9,6 +9,11 @@
 
      Essentially, probability density is measured at each pixel. Because every fractal has different measure and dimension, some the runtime of the program needs to be adjusted accordingly.  One need to plot more points for the Sierpinski Gasket than for the Cantor Set with similar detail.  Therefore, a brightness parameter is included to vary the runtime. Think of this like the exposure on a camera: nothing will show up if it is too low, and every point will be white if it is too high. In addition, great detail is not always required, and can be counterproductive because of the additional time. To increase the speed of fractal generation, in exchange for accuracy, one can adjust the graininess parameter. This is roughly analogus to the ISO on a camera. Finally, the user can adjust the weights of each function in the IFS. This is necessary for fractals like the barnsley fern. For more information about these parameters, see the comments in the code.
 
+Brief descriptions of modules:
+    fractal.py - This is the main module, generally run this script to draw a fractal.
+    ifs.py - This is a library of commonly used IFSs.
+    bifs.py - This is a template for generating IFSs with a large number of functions.
+    bitmap.py - module for creating a .bmp file from a two dimensional integer array
 
 Notes:
 
