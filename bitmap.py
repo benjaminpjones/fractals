@@ -45,7 +45,7 @@ def twoDimArrayToBitmap(pixelList, fileName):
         flatPixelList.extend(pixelList[i] + paddingArray)
     newFileBytes = dummyHeaderList + flatPixelList + [0,0]
     newFileByteArray = bytearray(newFileBytes)
-    newFile = open (fileName, "wb")
+    newFile = open(fileName, "wb")
     newFile.write(newFileByteArray)
     newFile.close()
     

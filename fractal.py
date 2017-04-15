@@ -5,13 +5,36 @@ import ifs
 
 #randomFunction for a IFS like the barnsley fern
 
-def randomWeighted(weights):
+def randomWeighted(weights, accumulated = False):
+  if not accumulated:
     randomNum = random.random()
     k = 0.0
     for i in range(len(weights)):
         if randomNum >= k and randomNum <= k + weights[i]:
             return i
         else: k += weights[i]
+  else:
+    randomNum = random.random()
+    i = jump = len(weights)/2
+    while True:
+        if jump > 1:
+            jump /= 2
+        if i < 1:
+            if randomNum <= weights[0]:
+                return 0
+            else:
+                i += jump
+        elif i >= len(weights) - 1:
+            if randomNum >= weights[i]:
+                return len(weights)-1
+            else:
+                i -= jump
+        elif weights[i] < randomNum:
+            i += jump
+        elif weights[i-1] > randomNum:
+            i -= jump
+        else:
+            return i
 
 def xyToPixel(point, minX, minY, xSize, ySize, width, height):
     pixelX = int((point[0] - minX)*width/xSize)
@@ -42,11 +65,19 @@ def makeFractal(ifs,
     currentPoint = (0.0,0.0)
     progressCounter = 0
 
+    #normalize and accumulate weights
+    if weights:
+        sumWeights = float(sum(weights))
+        accumWeights = []
+        current = 0.0
+        for i in xrange(len(weights)):
+            accumWeights.append((weights[i]/sumWeights) + current)
+
     for i in xrange(iterations):
         if not weights:
             whichFunc = random.randint(0,len(IFSList)-1)
         else:
-            whichFunc = randomWeighted(weights)
+            whichFunc = randomWeighted(accumWeights, True)
         currentPoint = IFSList[whichFunc](currentPoint)
         pixelX,pixelY = xyToPixel(currentPoint, minX, minY, xSize, ySize, width, height)
 
@@ -67,10 +98,11 @@ def makeFractal(ifs,
 
 if __name__ == "__main__":
 
-    makeFractal(ifs=ifs.dragonIFS[0:2],
-                height=3600, width=5400,
+    makeFractal(ifs=ifs.sierpIFS,
+                weights = False,
+                height=500, width=500,
                 xRange=(-0.475, 1.325), yRange=(-0.44, 0.77),
-                iterations=5000000, graininess=51,
+                iterations=2000000, graininess=51,
                 bmpname="newdragon")
 
 
