@@ -98,7 +98,7 @@ def makeFractal(ifs,
 
 if __name__ == "__main__":
 
-    makeFractal(ifs=ifs.sierpIFS,
+    makeFractal(ifs=ifs.dragonIFS[:2],
                 weights = False,
                 height=500, width=500,
                 xRange=(-0.475, 1.325), yRange=(-0.44, 0.77),
