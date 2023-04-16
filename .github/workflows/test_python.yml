@@ -1,0 +1,16 @@
+# https://beta.ruff.rs
+# https://docs.pytest.org
+name: test_python
+on:
+  push:
+  #  branches: [master]
+  pull_request:
+    branches: [master]
+jobs:
+  test_python:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - run: pip install --user pytest ruff
+    - run: ruff --format=github --target-version=py37 .
+    - run: pytest
